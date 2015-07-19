@@ -6,7 +6,9 @@ reqpage='http://www.amazon.com/dp/B00GDQ0RMG/ref=ods_gw_d_L_h1_montoya?pf_rd_m=A
 
 
 def get_amazon_price(website):
-    page=requests.get(reqpage)
+    page=requests.get(website)
     tree=html.fromstring(page.text)
     price=tree.xpath('//*[@id="priceblock_ourprice"]/text()')
-    return {"url":website,"price":int(float(price[0][1:])*100),"time":datetime.datetime.today()}
+    p=int(float(str(price[0])[1:])*100)
+    d=datetime.datetime.now()
+    return {"url":website, "price":p, "time":d.isoformat()}

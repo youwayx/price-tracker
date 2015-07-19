@@ -1,8 +1,8 @@
 
-import scraping
+from scraping import get_amazon_price
 from forms import TrackPriceForm
 from app import app
-
+import json
 
 
 
@@ -10,5 +10,7 @@ from app import app
 @app.route("/track", methods=["POST"])
 def track_price():
     form = TrackPriceForm()
-    if form.validate_on_submit():
-        return scraping.get_amazon_price(form.url.data)
+    #if form.validate():
+
+    return json.dumps(get_amazon_price(form.url.data))
+    #return "wassup"
