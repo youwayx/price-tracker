@@ -19,7 +19,7 @@ def track_price():
         	return redirect('/failure')
         else:
             price_info["email"] = form.email.data
-            price_info["requested_price"] = form.requested_price.data
+            price_info["requested_price"] = to_cents(form.requested_price.data)
             print(price_info)
             response = post_transaction(price_info)
             return redirect('/success')
@@ -28,13 +28,18 @@ def track_price():
     	# check if response.get('success') is true
     	# redirect to some success page
 
+
+def to_cents(price):
+	price = float(price)
+	return int(100*price)
+
 def post_transaction(info):
     session = Session()
     email = info['email']
     user_obj = session.query(User).filter(User.email == email).first()
     if not user_obj:
         user_obj = User(email=email)
-        session.add(new_user)
+        session.add(user_obj)
         session.commit()
 
 	user_id = user_obj.id
