@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>Price Tracking</title>
+</head>
+<body>
+  <form method=POST action="/track">
+    {{form.email()}}<br>
+    {{form.url()}}<br>
+    {{form.requestedprice()}}<br>
+    {{ form.csrf_token }}
+    <input type=submit value="go">
+  </form>
+</body>
+</html>
