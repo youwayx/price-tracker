@@ -32,12 +32,13 @@ class Transaction(Base):
 	id = Column(Integer, primary_key=True)
 	item_id = Column(Integer)
 	user_id = Column(Integer)
-	price = Column(Integer)
+	requested_price = Column(Integer)
 
 	def __init__(self, item_id, user_id, price):
 		self.item_id = item_id
 		self.user_id = user_id
 		self.price = price
 
-Base.metadata.create_all(engine) 
+def init():
+	Base.metadata.create_all(engine) 
 
