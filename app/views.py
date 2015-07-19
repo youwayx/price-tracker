@@ -12,21 +12,21 @@ def hello():
 
 @app.route("/track", methods=["POST","GET"])
 def track_price():
-    form = TrackPriceForm()
-    if form.validate():
-        price_info = get_amazon_price(form.url.data)
-        if not price_info.get("success", False):
-        	return redirect('/failure')
-        else:
-            price_info["email"] = form.email.data
-            price_info["requested_price"] = to_cents(form.requested_price.data)
-            print(price_info)
-            response = post_transaction(price_info)
-            return redirect('/success')
+	form = TrackPriceForm()
+	if form.validate():
+		price_info = get_amazon_price(form.url.data)
+		if not price_info.get("success", False):
+			return redirect('/failure')
+		else:
+			price_info["email"] = form.email.data
+			price_info["requested_price"] = to_cents(form.requested_price.data)
+			print(price_info)
+			response = post_transaction(price_info)
+			return redirect('/success')
 
-    return render_template('requestprice.html', form=form)
-    	# check if response.get('success') is true
-    	# redirect to some success page
+	return render_template('requestprice.html', form=form)
+		# check if response.get('success') is true
+		# redirect to some success page
 
 
 def to_cents(price):
@@ -34,13 +34,13 @@ def to_cents(price):
 	return int(100*price)
 
 def post_transaction(info):
-    session = Session()
-    email = info['email']
-    user_obj = session.query(User).filter(User.email == email).first()
-    if not user_obj:
-        user_obj = User(email=email)
-        session.add(user_obj)
-        session.commit()
+	session = Session()
+	email = info['email']
+	user_obj = session.query(User).filter(User.email == email).first()
+	if not user_obj:
+		user_obj = User(email=email)
+		session.add(user_obj)
+		session.commit()
 
 	user_id = user_obj.id
 
