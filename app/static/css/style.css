@@ -131,7 +131,7 @@ ul.navbar-nav {
 	color: #fff;
 }
 
-.top-content .text h1 { color: #fff; }
+.top-content .text h1,h2 { color: #fff; }
 
 .top-content .description {
 	margin: 20px 0 10px 0;
@@ -231,7 +231,7 @@ only screen and (                min-resolution: 2dppx) {
 
 	/* logo */
     .navbar-brand {
-    	
+
     }
 
 }
