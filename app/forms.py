@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms.fields import TextField, DecimalField
+from wtforms.fields import TextField
 from wtforms.validators import Required, Email
 
 class TrackPriceForm(Form):

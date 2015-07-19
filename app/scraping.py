@@ -15,3 +15,5 @@ def get_amazon_price(website):
 		return {"success": False, "message": "No price found"}
 	d = datetime.datetime.now()
 	return {"success": True, "url":website, "price":p, "time":d.isoformat()}
+
+print (get_amazon_price(reqpage))

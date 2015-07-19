@@ -10,7 +10,7 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href= {{ url_for('static', filename='../static/bootstrap/css/bootstrap.min.css') }} />
         <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="../static/css/form-elements.css">
         <link rel="stylesheet" href="../static/css/style.css">
@@ -67,19 +67,17 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="" method="post" class="registration-form">
+			                    <form action="/track" method="post" class="registration-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">Email</label>
-			                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+			                        	{{form.email(placeholder="Email...", class="form-control")}}
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-last-name">URL</label>
-			                        	<input type="text" name="form-url" placeholder="URL of desired item..." class="form-url form-control" id="form-url">
+			                        	{{form.url(placeholder="URL of desired item...", class="form-control")}}
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-requested-price">Requested Price</label>
-			                        	<input type="text" name="form-requested-price" placeholder="Requested price of item..." class="form-requested-price form-control" id="form-requested-price">
+			                        	{{form.requested_price(placeholder="Requested price of item...", class="form-control")}}
 			                        </div>
+                                    {{form.csrf_token()}}
 			                        <button type="submit" class="btn">Start tracking!</button>
 			                    </form>
 		                    </div>
