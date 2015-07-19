@@ -4,9 +4,9 @@
 </head>
 <body>
   <form method=POST action="/track">
-    {{form.email()}}<br>
-    {{form.url()}}<br>
-    {{form.requestedprice()}}<br>
+    <p>email</p>{{form.email()}}<br>
+    <p>store url<p>{{form.url()}}<br>
+    <p>requested price</p>{{form.requested_price()}}<br>
     {{ form.csrf_token }}
     <input type=submit value="go">
   </form>
