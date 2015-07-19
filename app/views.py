@@ -1,6 +1,6 @@
 from app import app
 from app.models import User, Item, Transaction, Session
-from forms import TrackPriceForm
+from forms import TrackPriceForm, ShowTransactionsForm
 from scraping import get_amazon_price
 import json
 from flask import render_template, redirect
@@ -35,6 +35,10 @@ def track_price():
 		# check if response.get('success') is true
 		# redirect to some success page
 
+@app.route("/transactions", methods=["GET"])
+def show_transactions():
+	form = ShowTransactionsForm()
+	
 
 def to_cents(price):
 	price = float(price)
