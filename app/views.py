@@ -1,10 +1,7 @@
-
-from scraping import get_amazon_price
-from forms import TrackPriceForm
 from app import app
+from forms import TrackPriceForm
+from scraping import get_amazon_price
 import json
-
-
 
 
 @app.route("/track", methods=["POST"])
