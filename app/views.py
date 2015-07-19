@@ -9,6 +9,13 @@ from flask import render_template, redirect
 def hello():
 	return "hi"
 
+@app.route("/success")
+def show_success():
+	return render_template('success.html')
+
+@app.route("/failure")
+def show_failure():
+	return render_template('failure.html')
 
 @app.route("/track", methods=["POST","GET"])
 def track_price():
