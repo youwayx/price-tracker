@@ -35,10 +35,15 @@ def track_price():
 		# check if response.get('success') is true
 		# redirect to some success page
 
-@app.route("/transactions", methods=["GET"])
+@app.route("/transactions", methods=["GET", "POST"])
 def show_transactions():
 	form = ShowTransactionsForm()
-	
+	if form.validate():
+		resp = get_transactions(form.email.data)
+		return json.dumps(resp)
+
+	return render_template('transactions.html', form=form)
+
 
 def to_cents(price):
 	price = float(price)
