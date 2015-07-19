@@ -24,7 +24,7 @@ class User(Base):
 	id = Column(Integer, primary_key=True)
 	email = Column(String(200), unique=True)
 
-	def __init__(self, url, price):
+	def __init__(self, email):
 		self.email = email
 
 
@@ -36,10 +36,10 @@ class Transaction(Base):
 	user_id = Column(Integer)
 	requested_price = Column(Integer)
 
-	def __init__(self, item_id, user_id, price):
+	def __init__(self, item_id, user_id, requested_price):
 		self.item_id = item_id
 		self.user_id = user_id
-		self.price = price
+		self.requested_price = requested_price
 
 def init():
 	Base.metadata.create_all(engine) 

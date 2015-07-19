@@ -45,6 +45,8 @@ def post_transaction(info):
 		session.add(item_obj)
 		session.commit()
 
+	item_id = item_obj.id
+
 	transaction_obj = session.query(Transaction) \
 		.filter(Transaction.item_id == item_id) \
 		.filter(Transaction.user_id == user_id) \
@@ -53,7 +55,9 @@ def post_transaction(info):
 	if transaction_obj:
 		transaction_obj.requested_price = info['requested_price']
 	else:
-		transaction_obj = Transaction(user_id=user_id, item_id=item_id)
+		transaction_obj = Transaction(user_id=user_id,
+			item_id=item_id,
+			requested_price=info['requested_price'])
 		session.add(transaction_obj)
 	session.commit()
 
@@ -61,5 +65,5 @@ def post_transaction(info):
 	response['success'] = True
 	response['item_id'] = item_id
 	response['user_id'] = user_id
-	response['requested_price'] = requested_price
+	response['requested_price'] = info['requested_price']
 	return response
