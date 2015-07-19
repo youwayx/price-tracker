@@ -1,14 +1,22 @@
 <html>
 <head>
-  <title>Price Tracking</title>
+    <title>Price Tracking</title>
+
+    <link href="app/templates/css/bootstrap.css" rel="stylesheet">
+
 </head>
+
 <body>
-  <form method=POST action="/track">
-    <p>email</p>{{form.email()}}<br>
-    <p>store url<p>{{form.url()}}<br>
-    <p>requested price</p>{{form.requested_price()}}<br>
-    {{ form.csrf_token }}
-    <input type=submit value="go">
+    <form method=POST action="/track">
+
+        <p>email</p>{{form.email()}}<br>
+        <p>store url</p>{{form.url()}}<br>
+        <p>requested price</p>{{form.requested_price()}}<br>
+        {{ form.csrf_token }}
+
+        <input type=submit value="go">
   </form>
+
+  <script src="/js/bootstrap.js"></script>
 </body>
 </html>
