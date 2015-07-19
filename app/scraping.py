@@ -8,7 +8,10 @@ reqpage = 'http://www.amazon.com/dp/B00GDQ0RMG/ref=ods_gw_d_L_h1_montoya?pf_rd_m
 def get_amazon_price(website):
     page = requests.get(website)
     tree = html.fromstring(page.text)
-    price = tree.xpath('//*[@id="priceblock_ourprice"]/text()')
-    p = int(float(str(price[0])[1:])*100)
+    try:
+    	price = tree.xpath('//*[@id="priceblock_ourprice"]/text()')
+    	p = int(float(str(price[0])[1:])*100)
+    except:
+    	return {"success": False, "message": "No price found"}
     d = datetime.datetime.now()
-    return {"url":website, "price":p, "time":d.isoformat()}
+    return {"success": True, "url":website, "price":p, "time":d.isoformat()}
