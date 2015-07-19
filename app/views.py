@@ -40,6 +40,29 @@ def to_cents(price):
 	price = float(price)
 	return int(100*price)
 
+
+def get_transactions(email):
+	session = Session()
+	user_obj = session.query(User).filter(User.email == email).first()
+
+	if not user_obj:
+		return {}
+
+	transactions = session.query(Transaction).filter(Transaction.user_id == user_obj.id).all()
+
+	response = []
+	for transaction in transactions:
+		transaction_info = {}
+		item_id = transaction.item_id
+		item_obj = session.query(Item).filter(Item.id == item_id).first()
+		transaction_info['url'] = item_obj.url
+		transaction_info['price'] = item_obj.price
+		transaction_info['requested_price'] = transaction.requested_price
+		response.append(transaction_info)
+
+	return response
+
+
 def post_transaction(info):
 	session = Session()
 	email = info['email']
