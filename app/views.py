@@ -14,19 +14,22 @@ def hello():
 def track_price():
     form = TrackPriceForm()
     #if form.validate():
-
     price_info = get_amazon_price(form.url.data)
     if not price_info.get("success", False):
     	return json.dumps(price_info)
 
     else:
     	price_info["email"] = form.email.data
-    	price_info["requested_price"] = form.requested_price.data
+    	price_info["requested_price"] = to_cents(form.requested_price.data)
     	return json.dumps(post_transaction(price_info))
 
     	# check if response.get('success') is true
     	# redirect to some success page
 
+
+def to_cents(price):
+	price = float(price)
+	return int(price * 100)
 
 
 def post_transaction(info):
@@ -35,7 +38,7 @@ def post_transaction(info):
 
 	if not user_obj:
 		user_obj = User(email=info['email'])
-		session.add(new_user)
+		session.add(user_obj)
 		session.commit()
 
 	user_id = user_obj.id
@@ -46,6 +49,8 @@ def post_transaction(info):
 		session.add(item_obj)
 		session.commit()
 
+	item_id = item_obj.id
+
 	transaction_obj = session.query(Transaction) \
 		.filter(Transaction.item_id == item_id) \
 		.filter(Transaction.user_id == user_id) \
@@ -54,7 +59,9 @@ def post_transaction(info):
 	if transaction_obj:
 		transaction_obj.requested_price = info['requested_price']
 	else:
-		transaction_obj = Transaction(user_id=user_id, item_id=item_id)
+		transaction_obj = Transaction(user_id=user_id, 
+			item_id=item_id, 
+			requested_price=info['requested_price'])
 		session.add(transaction_obj)
 	session.commit()
 
@@ -62,5 +69,5 @@ def post_transaction(info):
 	response['success'] = True
 	response['item_id'] = item_id
 	response['user_id'] = user_id
-	response['requested_price'] = requested_price
+	response['requested_price'] = info['requested_price']
 	return response
