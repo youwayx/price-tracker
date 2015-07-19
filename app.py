@@ -1,8 +1,8 @@
 from flask import Flask
 import models
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 @app.route("/")
 def hello():
@@ -11,4 +11,3 @@ def hello():
 if __name__ == "__main__":
 	app.run()
 	models.init()
-
