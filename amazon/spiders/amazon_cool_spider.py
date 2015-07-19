@@ -1,5 +1,8 @@
 import scrapy
-from amazon.items import AmazonItem
+#from amazon.items import AmazonItem
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
+
 
 class AmazonSpider(scrapy.Spider):
     name = "amazon_cool"
@@ -12,3 +15,8 @@ class AmazonSpider(scrapy.Spider):
             item=AmazonItem()
             item['price']=price.xpath('text()').extract()
             yield item
+
+process = CrawlerProcess(get_project_settings())
+
+process.crawl(AmazonSpider)
+#process.start()
