@@ -3,3 +3,4 @@ env/
 *.pyc
 *.DS_Store
 alembic.ini
+secrets.py
