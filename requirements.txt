@@ -2,3 +2,6 @@ flask-SQLAlchemy
 psycopg2
 flask
 flask-wtf
+lxml
+uwsgi==2.0.11.1
+requests
