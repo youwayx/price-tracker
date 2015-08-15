@@ -1,4 +1,4 @@
-from . import app
+from .app import app
 from .models import User, Item, Transaction, Session
 from .forms import TrackPriceForm, ShowTransactionsForm
 from .scraping import get_amazon_price
