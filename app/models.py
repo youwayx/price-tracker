@@ -1,7 +1,11 @@
-from sqlalchemy import create_engine, Column, Integer, String 
+from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from secrets import POSTGRES_URL
+import os
+if not os.environ.get('POSTGRES_URL', None):
+	from secrets import POSTGRES_URL
+else:
+	POSTGRES_URL = os.environ.get('POSTGRES_URL')
 
 engine = create_engine(POSTGRES_URL, echo=True)
 Base = declarative_base()
@@ -41,5 +45,4 @@ class Transaction(Base):
 		self.requested_price = requested_price
 
 def init():
-	Base.metadata.create_all(engine) 
-
+	Base.metadata.create_all(engine)
