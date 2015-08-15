@@ -1,10 +1,9 @@
-from secrets import postgres_url
 from sqlalchemy import create_engine, Column, Integer, String 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from secrets import POSTGRES_URL
 
-
-engine = create_engine(postgres_url, echo=True)
+engine = create_engine(POSTGRES_URL, echo=True)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 

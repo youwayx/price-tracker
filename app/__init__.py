@@ -1,7 +1,8 @@
 from flask import Flask
-from amazon import models
+import models
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_pyfile('config.py')
 
 @app.route("/")
 def hello():

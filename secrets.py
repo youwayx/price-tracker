@@ -1,1 +1,1 @@
-postgres_url = "postgres://rixckaok:GBpRpss0kkDW1pcArO45LW7EIduLnqW5@babar.elephantsql.com:5432/rixckaok"
+POSTGRES_URL = "postgres://rixckaok:GBpRpss0kkDW1pcArO45LW7EIduLnqW5@babar.elephantsql.com:5432/rixckaok"
