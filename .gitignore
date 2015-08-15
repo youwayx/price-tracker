@@ -3,3 +3,4 @@ instance/
 env/
 *.pyc
 *.DS_Store
+alembic.ini

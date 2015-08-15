@@ -1,5 +1,4 @@
-SQLAlchemy
+flask-SQLAlchemy
 psycopg2
 flask
 flask-wtf
-gunicorn==19.3.0
